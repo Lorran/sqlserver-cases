@@ -46,14 +46,14 @@ The wait type **CXPACKET** show up when SQL Server executes a query using the pa
 ## Enable option
 ------------------
 
-```sql
+```tsql
 EXEC sp_configure 'show advanced options', 1
 RECONFIGURE
 ```
 
 ## See value in option
 ------------------
-```sql
+```tsql
 select configuration_id,
 	   name,
 	   value,
@@ -66,13 +66,13 @@ where  name in('max degree of parallelism','cost threshold for parallelism')
 
 ## Change value in instance
 ------------------
-```sql
+```tsql
 exec sp_configure 'max degree of parallelism',2
 RECONFIGURE
 ```
 and
 
-```sql
+```tsql
 exec sp_configure 'cost threshold for parallelism',25
 RECONFIGURE
 ```
@@ -81,16 +81,16 @@ RECONFIGURE
 ## Change value in database (version only 2016 more)
 ------------------
 
-```sql
+```tsql
 ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 8;
 ```
 We can define value for database secondary replica 
 
-```sql
+```tsql
 ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = 1;
 ```
 
-```sql
+```tsql
 SELECT * 
 FROM  sys.database_scoped_configurations
 where name='MAXDOP'
@@ -99,7 +99,7 @@ where name='MAXDOP'
 ## Set value maxdop query hint
 ------------------
 
-```sql
+```tsql
 SELECT ExpYEar,
        CardType,
 	   count(CardType) as Total
@@ -111,14 +111,14 @@ OPTION (MAXDOP 2)
 
 ## Set value maxdop index option
 
-```sql
+```tsql
 create INDEX  IX_Sales_maxdop_example ON [AdventureWorks2019].[Sales].[CreditCard] (cardNumber)  
 with (MAXDOP =1 , SORT_IN_TEMPDB = ON)
 ```
 
 or alter
 
-```sql
+```tsql
 alter  INDEX all  ON [AdventureWorks2019].[Sales].[CreditCard] 
 REBUILD WITH (MAXDOP =1 , SORT_IN_TEMPDB = ON, ONLINE = ON)
 ```
@@ -128,7 +128,7 @@ REBUILD WITH (MAXDOP =1 , SORT_IN_TEMPDB = ON, ONLINE = ON)
 ## Find queries with parallelism
 ------------------
 
-```sql
+```tsql
 --Query is running
 select r.session_id,
 	   r.status,
@@ -147,7 +147,7 @@ order by worker_address
 ```
  
 
-```sql
+```tsql
 SELECT TOP 10
 p.*,
 q.*,
