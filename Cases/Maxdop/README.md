@@ -1,7 +1,6 @@
 # MAXDOP
 
-
-### What's MAXDOP?
+## What's MAXDOP?
 Max Degree of Parallelism (MAXDOP) is a configuration to define the number of processors that will be made available to each individual execution of a query. MAXDOP is divided into two options are **max degree of parallelism** and **cost threshold for parallelism**. 
 
 - **Max degree of parallelism:** Is the limit of processors that can execute to each individual query.
@@ -9,20 +8,20 @@ Max Degree of Parallelism (MAXDOP) is a configuration to define the number of pr
 
 We can configure through **graphic interface** or **sp_configure** 
 
-### Have Parallelism is a problem??
+## Have Parallelism is a problem??
 Maybe, It can high levels indicate missing or fragmented index, and until out-of-date statistics.
 
-### Why should I configure maxdop?
+## Why should I configure maxdop?
 Because the default value for maxdop is 0, it signifies that Sql Server can use all processors available, until 64 processors. According to the documentation of Microsoft, the default value is not recommended.
 
-### What's the best value for maxdop?
+## What's the best value for maxdop?
 I think that depends. Maybe, one value could help you, but another person not. I will suggest a change and rate, but you will be careful. 
 
 I have seen some forums recommending the following value cost threshold for parallelism 25 and 50.  
 
 In common OLAP systems, there are many MAXDOP because the transactions are bit and more complex.
 
-### Wait type
+## Wait type
 The wait type **CXPACKET** show up when SQL Server executes a query using the parallel plan. Not always is reference problem, because it's a normal. 
 
 ## How many virtual processors do you have
